@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Navy "R" body -->
+  <path d="M14 112V46C14 24 31 8 53 8h6c22 0 38 15 38 35 0 15-8 26-21 31l22 38H72L52 78H40v34z" fill="#14243A"/>
+  <!-- Blue road sweeping through the R -->
+  <path d="M30 112c2-26 8-42 26-50 14-6 24-14 22-26" stroke="#246BCE" stroke-width="20" stroke-linecap="round"/>
+  <path d="M30 112c2-26 8-42 26-50 14-6 24-14 22-26" stroke="#fff" stroke-width="2.5" stroke-dasharray="6 7" stroke-linecap="round"/>
+  <!-- Orange location pin -->
+  <path d="M84 4c-9 0-16 7-16 16 0 12 16 26 16 26s16-14 16-26c0-9-7-16-16-16z" fill="#F59E0B"/>
+  <circle cx="84" cy="20" r="6" fill="#fff"/>
+  <!-- Rays -->
+  <g stroke="#F59E0B" stroke-width="4" stroke-linecap="round">
+    <path d="M106 8l6-4"/><path d="M108 20h7"/><path d="M106 32l6 4"/>
+  </g>
+</svg>

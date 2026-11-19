@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9cc0e8"/>
+      <stop offset=".55" stop-color="#f6c98e"/>
+      <stop offset="1" stop-color="#f3dcb8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <path d="M0 330 120 250 220 300 340 200 470 290 580 230 700 280 800 240V600H0z" fill="#7b97bd"/>
+  <path d="M0 390 90 340 200 380 300 320 420 370 540 310 660 360 800 320V600H0z" fill="#4d6c96"/>
+  <path d="M0 450 140 410 260 440 380 400 520 440 640 405 800 430V600H0z" fill="#2f4b72"/>
+  <!-- town blocks -->
+  <g fill="#e9eef5" opacity=".85">
+    <rect x="60" y="455" width="26" height="20"/><rect x="92" y="448" width="18" height="27"/><rect x="200" y="462" width="30" height="18"/>
+    <rect x="330" y="450" width="22" height="24"/><rect x="358" y="458" width="28" height="18"/><rect x="470" y="452" width="24" height="22"/>
+    <rect x="560" y="460" width="30" height="18"/><rect x="680" y="450" width="20" height="26"/><rect x="706" y="458" width="26" height="18"/>
+  </g>
+  <path d="M0 500 160 470 320 495 480 465 640 492 800 470V600H0z" fill="#1f3554"/>
+  <!-- pines -->
+  <g fill="#14243A">
+    <path d="M30 520 45 470 60 520z"/><path d="M70 525 82 485 94 525z"/><path d="M250 520 266 465 282 520z"/>
+    <path d="M420 522 434 478 448 522z"/><path d="M600 520 616 468 632 520z"/><path d="M740 524 754 480 768 524z"/>
+  </g>
+  <rect y="520" width="800" height="80" fill="#14243A"/>
+</svg>

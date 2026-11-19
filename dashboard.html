@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Routis — Dashboard</title>
+  <link rel="icon" href="assets/logo-mark.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="assets/logo-mark.svg" alt="">
+      <span class="wordmark">routis</span>
+    </div>
+    <nav class="nav">
+      <a href="#dashboard" data-view="dashboard">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h5v-6h4v6h5v-8h3z"/></svg>Dashboard</a>
+      <a href="#map" data-view="map">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Map</a>
+      <a href="#alerts" data-view="alerts">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2zm6-6V11c0-3-1.6-5.6-4.5-6.3V4a1.5 1.5 0 0 0-3 0v.7C7.6 5.4 6 8 6 11v5l-2 2v1h16v-1z"/></svg>Alerts <span class="count" id="navAlertCount">3</span></a>
+      <a href="#routes" data-view="routes">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.5 5.5-2.5 7-7 2.5 2.5-7z"/></svg>Routes</a>
+      <a href="#customers" data-view="customers">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3.9 3.1-6 7-6s7 2.1 7 6zm14.5 0c0-2-.7-3.6-1.9-4.8 3.5-.4 6.4 1.2 6.4 4.8z"/></svg>Customers</a>
+      <a href="#settings" data-view="settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.4 2.7a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1L11 21h4l.4-2.7a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg>Settings</a>
+    </nav>
+    <div class="help">
+      Need Help?
+      <a href="#">Contact Support →</a>
+      <a href="index.html">Log out</a>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="menu-btn" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="search" type="search" placeholder="Search for roads, areas, or projects..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+      <div class="spacer"></div>
+      <button class="bell" id="bell" aria-label="Notifications">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        <span class="dot">3</span>
+      </button>
+      <div class="user">
+        <span class="avatar" id="avatar">JD</span>
+        <div><strong id="userName">Juan Dela Cruz</strong><small id="userBiz">Cafe Panorama</small></div>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- ============ DASHBOARD ============ -->
+      <section class="view" id="view-dashboard">
+        <div class="kpis">
+          <div class="card kpi">
+            <div class="icon" style="background:var(--blue)"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16l1 5a3 3 0 0 1-5 2 3 3 0 0 1-4 0 3 3 0 0 1-4 0 3 3 0 0 1-5-2zm1 9h14v7H5z"/></svg></div>
+            <div><div class="label">Active Alerts</div><div class="value">3<span class="delta">↑ +1</span></div></div>
+            <span id="spark1"></span>
+          </div>
+          <div class="card kpi">
+            <div class="icon" style="background:var(--orange)"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3h4l4.5 15H5.5zM3 19h18v2H3z"/><path d="M8.3 9h7.4l.6 2H7.7zm-1 4h9.4l.6 2H6.7z" fill="#fff"/></svg></div>
+            <div><div class="label">Affected Roads</div><div class="value">2</div></div>
+            <span id="spark2"></span>
+          </div>
+          <div class="card kpi">
+            <div class="icon" style="background:#5b9bea"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M2 6h12v10H2zm12 4h4l3 3v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></div>
+            <div><div class="label">Delivery Status</div><div class="value ok">On Track</div></div>
+            <span id="spark3"></span>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <div class="card map-card">
+            <div id="dashMap" class="map"></div>
+            <div class="map-title">Baguio City</div>
+            <div class="map-legend">
+              <span><i style="background:var(--red)"></i>Road Closure</span>
+              <span><i style="background:var(--orange)"></i>Road Work</span>
+              <span><i style="background:var(--blue)"></i>Alternative Route</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="alerts-head">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="#E34B4B"><path d="M12 2 1 21h22zm-1 7h2v6h-2zm0 8h2v2h-2z"/></svg>
+              <h2>Road Disruption Alerts</h2>
+              <a href="#alerts">See All →</a>
+            </div>
+            <div class="alert-list" id="dashAlerts"></div>
+          </div>
+        </div>
+
+        <div class="card suggest">
+          <svg width="44" height="44" viewBox="0 0 24 24"><g stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round"><path d="M12 1v2M4.2 4.2l1.4 1.4M1 12h2M21 12h2M18.4 5.6l1.4-1.4"/></g><path d="M12 5a6 6 0 0 0-3.5 10.9V18h7v-2.1A6 6 0 0 0 12 5z" fill="#F59E0B"/><rect x="9" y="19" width="6" height="2.5" rx="1" fill="#14243A"/></svg>
+          <div>
+            <h3>Suggested Action</h3>
+            <p>Use the alternative route through Leonard Wood Road.</p>
+          </div>
+          <a class="btn btn-navy" href="#routes">View Route →</a>
+        </div>
+      </section>
+
+      <!-- ============ MAP ============ -->
+      <section class="view" id="view-map">
+        <div>
+          <h1 class="page-title">Live Map</h1>
+          <p class="page-sub">All reported construction works, closures and events in Baguio City.</p>
+        </div>
+        <div class="card map-card">
+          <div id="fullMap" class="map tall"></div>
+          <div class="map-legend">
+            <span><i style="background:var(--red)"></i>Road Closure</span>
+            <span><i style="background:var(--orange)"></i>Road Work</span>
+            <span><i style="background:var(--blue)"></i>Event / Alternative Route</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ALERTS ============ -->
+      <section class="view" id="view-alerts">
+        <div>
+          <h1 class="page-title">Alerts</h1>
+          <p class="page-sub">Public construction works and disruptions near your business and delivery areas.</p>
+        </div>
+        <div class="filters" id="alertFilters">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="high">High Impact</button>
+          <button class="chip" data-filter="medium">Medium</button>
+          <button class="chip" data-filter="info">Info</button>
+        </div>
+        <div class="card"><div class="alert-list" id="allAlerts"></div></div>
+        <div class="card" id="alertDetail" hidden></div>
+      </section>
+
+      <!-- ============ ROUTES ============ -->
+      <section class="view" id="view-routes">
+        <div>
+          <h1 class="page-title">Routes</h1>
+          <p class="page-sub">Cafe Panorama → Teachers Camp</p>
+        </div>
+        <div class="split">
+          <div class="card" style="display:grid;gap:12px;align-content:start">
+            <div id="routeOptions" style="display:grid;gap:12px"></div>
+            <button class="btn btn-primary" id="shareRoute">Send route to rider</button>
+          </div>
+          <div class="card map-card"><div id="routeMap" class="map tall"></div></div>
+        </div>
+      </section>
+
+      <!-- ============ CUSTOMERS ============ -->
+      <section class="view" id="view-customers">
+        <div>
+          <h1 class="page-title">Customers</h1>
+          <p class="page-sub">Today's deliveries and how road works affect them.</p>
+        </div>
+        <div class="card" style="overflow-x:auto">
+          <table class="table">
+            <thead><tr><th>Customer</th><th>Area</th><th>Orders</th><th>ETA</th><th>Status</th></tr></thead>
+            <tbody id="customerRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ SETTINGS ============ -->
+      <section class="view" id="view-settings">
+        <div>
+          <h1 class="page-title">Settings</h1>
+          <p class="page-sub">Choose how Routis keeps you informed.</p>
+        </div>
+        <div class="card">
+          <div class="settings-row"><div><strong>SMS alerts</strong><small>Text me when a new closure affects my area</small></div><label class="switch"><input type="checkbox" checked><span></span></label></div>
+          <div class="settings-row"><div><strong>Email digest</strong><small>Daily summary at 6:00 AM</small></div><label class="switch"><input type="checkbox" checked><span></span></label></div>
+          <div class="settings-row"><div><strong>Auto-reroute riders</strong><small>Push suggested routes to riders automatically</small></div><label class="switch"><input type="checkbox"><span></span></label></div>
+          <div class="settings-row"><div><strong>Event notices</strong><small>Festivals, parades and planned events</small></div><label class="switch"><input type="checkbox" checked><span></span></label></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

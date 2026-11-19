@@ -1,6 +1,7 @@
 /* Routis prototype — shared helpers (icons, map, alerts, toast). */
 (function () {
   const D = window.ROUTIS;
+  const CARTO_KEY = 'cb1_5c8l_1_d84a2ba3fe769a1228fe5cda';
 
   const ICONS = {
     work: '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 6.5 5.6 10.5H6.4L12 8.5z"/><path d="M11 11h2v4h-2zm0 5h2v2h-2z"/></svg>',
@@ -32,8 +33,10 @@
   /** Create a Leaflet map with alerts + routes drawn. Returns { map, routeLayers }. */
   function createMap(el, opts = {}) {
     const map = L.map(el, { zoomControl: true, scrollWheelZoom: opts.scroll ?? false }).setView(D.center, opts.zoom || 15);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO', maxZoom: 19,
+    // CARTO basemaps require a key (non-commercial demo use). Lock it to this site's domain in the CARTO dashboard.
+    L.tileLayer('https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=' + CARTO_KEY, {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attribution/">CARTO</a>',
+      maxNativeZoom: 18, maxZoom: 20,
     }).addTo(map);
 
     D.alerts.forEach(a => {

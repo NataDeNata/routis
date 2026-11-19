@@ -24,7 +24,7 @@ npx serve .
 python -m http.server 8000
 ```
 
-Maps use Leaflet with CARTO/OpenStreetMap tiles, so they need an internet connection.
+Maps use Leaflet with CARTO basemap tiles (API key in `js/app.js`, non-commercial demo use), so they need an internet connection.
 
 ## Structure
 

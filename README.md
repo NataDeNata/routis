@@ -33,7 +33,7 @@ css/styles.css     design tokens (brand palette) and all styles
 js/data.js         mock alerts, routes and customers (approximate coordinates)
 js/app.js          shared helpers: map, markers, alert cards, toast
 js/dashboard.js    business dashboard behaviour
-assets/            logo and illustration SVGs
+assets/            logo (PNG, full + mark) and illustration SVG
 ```
 
 ## Brand palette
